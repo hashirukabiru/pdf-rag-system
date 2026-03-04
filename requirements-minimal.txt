@@ -1,0 +1,9 @@
+# Minimal requirements with flexible versions for easy installation
+pypdf
+faiss-cpu
+numpy
+sentence-transformers
+torch
+gradio
+transformers
+huggingface-hub

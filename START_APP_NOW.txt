@@ -1,0 +1,44 @@
+================================================================================
+                    🚀 START YOUR PDF RAG SYSTEM NOW!
+================================================================================
+
+STEP 1: Open your terminal/command prompt in this directory
+
+STEP 2: Run ONE of these commands:
+
+    Windows:
+    --------
+    run_app.bat
+
+    Mac/Linux:
+    ----------
+    python app.py
+
+STEP 3: Wait for this message:
+    "Running on local URL: http://127.0.0.1:7860"
+
+STEP 4: Browser will auto-open, or manually open:
+    http://localhost:7860
+
+STEP 5: Upload your PDF:
+    - Click "Upload PDF Document"
+    - Select: data/sample.pdf
+    - Click "📤 Process PDF"
+
+STEP 6: Ask a question:
+    Try: "What topics are covered in this roadmap?"
+
+================================================================================
+
+📖 NEED HELP? Read: TEST_LOCALLY.md
+
+💡 SAMPLE QUESTIONS FOR data/sample.pdf:
+   - "What is this document about?"
+   - "What tools are mentioned for LLM engineering?"
+   - "List all the Python topics in the roadmap"
+   - "What are the final project suggestions?"
+
+🎯 YOUR NEXT ACTION:
+   Open terminal and type: python app.py
+
+================================================================================

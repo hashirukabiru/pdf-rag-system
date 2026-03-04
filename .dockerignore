@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+*.egg-info/
+dist/
+build/
+
+# Git
+.git/
+.gitignore
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Project specific
+uploads/
+flagged/
+*.faiss
+*.pkl
+
+# Documentation (not needed in container)
+*.md
+!README.md
+
+# Tests (optional, comment out if you want tests in container)
+test_*.py
+examples.py

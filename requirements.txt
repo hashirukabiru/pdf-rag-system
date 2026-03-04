@@ -1,0 +1,16 @@
+# Core dependencies for PDF processing and RAG
+pypdf>=4.0.0
+faiss-cpu>=1.9.0
+numpy>=1.24.0,<2.0.0
+sentence-transformers>=2.3.0
+torch>=2.0.0
+
+# Web UI
+gradio>=4.0.0
+
+# LLM and NLP
+transformers>=4.30.0
+huggingface-hub>=0.20.0
+
+# Optional: For local Ollama deployment only (not needed for HuggingFace Spaces)
+# ollama>=0.1.0

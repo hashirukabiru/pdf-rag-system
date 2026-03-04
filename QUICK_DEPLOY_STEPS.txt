@@ -1,0 +1,65 @@
+🚀 QUICK DEPLOY TO HUGGING FACE - 5 MINUTES!
+
+═══════════════════════════════════════════════════════════
+
+STEP 1: Create Space (2 min)
+───────────────────────────────
+1. Go to: https://huggingface.co/new-space
+2. Fill in:
+   - Name: pdf-rag-system
+   - SDK: Gradio
+   - Visibility: Public
+3. Click "Create Space"
+
+═══════════════════════════════════════════════════════════
+
+STEP 2: Upload Files (2 min)
+───────────────────────────────
+1. Click "Files" tab
+2. Click "Add file" → "Upload files"
+3. Upload these 3 files (RENAME them!):
+   
+   From your project          →  Upload as:
+   ─────────────────────────────────────────
+   app_hf.py                  →  app.py
+   requirements_hf.txt        →  requirements.txt
+   README_HF.md              →  README.md
+
+4. Click "Commit changes to main"
+
+═══════════════════════════════════════════════════════════
+
+STEP 3: Wait for Build (3-5 min)
+───────────────────────────────
+1. Watch the "Building..." status
+2. Wait for it to complete
+3. Your app will auto-start!
+
+═══════════════════════════════════════════════════════════
+
+STEP 4: Test It! (1 min)
+───────────────────────────────
+1. Upload a PDF
+2. Ask a question
+3. Celebrate! 🎉
+
+═══════════════════════════════════════════════════════════
+
+YOUR PUBLIC URL:
+https://huggingface.co/spaces/YOUR_USERNAME/pdf-rag-system
+
+Share it with the world! 🌍
+
+═══════════════════════════════════════════════════════════
+
+FILES TO UPLOAD (in your current folder):
+✅ app_hf.py
+✅ requirements_hf.txt
+✅ README_HF.md
+
+═══════════════════════════════════════════════════════════
+
+NEED HELP?
+Read: DEPLOY_TO_HUGGINGFACE.md (detailed guide)
+
+═══════════════════════════════════════════════════════════

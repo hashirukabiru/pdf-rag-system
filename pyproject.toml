@@ -1,0 +1,52 @@
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pdf-rag-system"
+version = "1.0.0"
+description = "A production-ready RAG system for PDF question answering"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+authors = [
+    {name = "Your Name", email = "your.email@example.com"}
+]
+keywords = ["pdf", "rag", "question-answering", "nlp", "ai", "llm"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+dependencies = [
+    "pypdf>=4.0.1",
+    "faiss-cpu>=1.7.4",
+    "numpy>=1.24.3",
+    "sentence-transformers>=2.3.1",
+    "gradio>=4.19.2",
+    "transformers>=4.37.2",
+    "torch>=2.1.2",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "black>=23.0.0",
+    "flake8>=6.0.0",
+]
+ollama = [
+    "ollama>=0.1.6",
+]
+
+[project.urls]
+Homepage = "https://github.com/yourusername/pdf-rag-system"
+Documentation = "https://github.com/yourusername/pdf-rag-system#readme"
+Repository = "https://github.com/yourusername/pdf-rag-system"
+"Bug Tracker" = "https://github.com/yourusername/pdf-rag-system/issues"

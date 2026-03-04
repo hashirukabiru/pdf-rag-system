@@ -1,0 +1,5 @@
+pypdf
+faiss-cpu
+sentence-transformers
+gradio
+numpy
