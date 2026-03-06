@@ -37,7 +37,8 @@ jobs:
           type=ref,event=pr
           type=semver,pattern={{version}}
           type=semver,pattern={{major}}.{{minor}}
-          type=raw,value=latest,enable={{github.ref == 'refs/heads/main'}}
+          # Wrap this in single quotes to fix the EQUALS error
+          type=raw,value=latest,enable='${{ github.ref == "refs/heads/main" }}'
     
     - name: Build and push
       uses: docker/build-push-action@v4
