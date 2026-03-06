@@ -1,11 +1,12 @@
 """
 LLM Handler Module
 Manages different LLM backends (Ollama, Hugging Face)
+Directly uses Model and Tokenizer to avoid Pipeline Task Errors
 """
 
 from typing import List
+import torch
 import config
-
 
 class LLMHandler:
     """Handle LLM interactions for answer generation"""
@@ -23,27 +24,30 @@ class LLMHandler:
             try:
                 import ollama
                 self.ollama = ollama
+                print(f"Ollama backend initialized with model: {config.LLM_MODEL_OLLAMA}")
             except ImportError:
                 raise ImportError("Ollama not installed. Run: pip install ollama")
         
         elif self.backend == "huggingface":
             try:
-                from transformers import pipeline, AutoTokenizer, AutoModelForSeq2SeqLM
+                from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
                 
-                # Load model and tokenizer explicitly
+                print(f"Loading Hugging Face model: {config.LLM_MODEL_HF}...")
+                
+                # Load model and tokenizer explicitly to avoid pipeline task KeyErrors
                 self.tokenizer = AutoTokenizer.from_pretrained(config.LLM_MODEL_HF)
                 self.model = AutoModelForSeq2SeqLM.from_pretrained(config.LLM_MODEL_HF)
                 
-                # Create pipeline with correct task name
-                self.pipeline = pipeline(
-                    "text2text-generation",
-                    model=self.model,
-                    tokenizer=self.tokenizer,
-                    max_length=512,
-                    device=-1  # CPU
-                )
+                # Set device to CPU
+                self.device = torch.device("cpu")
+                self.model.to(self.device)
+                
+                print("Hugging Face model loaded successfully!")
+                
             except ImportError:
-                raise ImportError("Transformers not installed. Run: pip install transformers")
+                raise ImportError("Transformers or Torch not installed. Run: pip install transformers torch")
+            except Exception as e:
+                raise Exception(f"Failed to load Hugging Face model: {str(e)}")
         else:
             raise ValueError(f"Unknown backend: {backend}. Use 'ollama' or 'huggingface'")
     
@@ -58,6 +62,7 @@ class LLMHandler:
         Returns:
             Generated answer
         """
+        # Combine context chunks into a single string
         context = "\n\n".join(context_chunks)
         prompt = self._create_prompt(context, question)
         
@@ -95,9 +100,31 @@ Answer:"""
             return f"Error generating answer with Ollama: {str(e)}"
     
     def _generate_huggingface(self, prompt: str) -> str:
-        """Generate answer using Hugging Face model"""
+        """
+        Generate answer using the model directly.
+        This bypasses the 'pipeline' and avoids task-name errors.
+        """
         try:
-            result = self.pipeline(prompt, max_length=512, min_length=20)
-            return result[0]["generated_text"]
+            # Tokenize input
+            inputs = self.tokenizer(
+                prompt, 
+                return_tensors="pt", 
+                truncation=True, 
+                max_length=512
+            ).to(self.device)
+            
+            # Generate output
+            outputs = self.model.generate(
+                **inputs,
+                max_new_tokens=256,
+                min_length=10,
+                do_sample=False,  # Set to False for consistent, factual RAG results
+                repetition_penalty=2.5
+            )
+            
+            # Decode and return
+            answer = self.tokenizer.decode(outputs[0], skip_special_tokens=True)
+            return answer if answer.strip() else "The model could not generate a clear answer."
+            
         except Exception as e:
             return f"Error generating answer with Hugging Face: {str(e)}"

@@ -3,4 +3,3 @@ faiss-cpu
 sentence-transformers
 gradio
 numpy
-audioop-lts
