@@ -22,6 +22,7 @@ jobs:
       if: github.event_name != 'pull_request'
       uses: docker/login-action@v2
       with:
+        # These pull from the Secrets you added in GitHub Settings
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
     
@@ -29,12 +30,14 @@ jobs:
       id: meta
       uses: docker/metadata-action@v4
       with:
-        images: yourusername/pdf-rag-system
+        # Updated to your actual Docker Hub username
+        images: kabiruhashiru/pdf-rag-system 
         tags: |
           type=ref,event=branch
           type=ref,event=pr
           type=semver,pattern={{version}}
           type=semver,pattern={{major}}.{{minor}}
+          type=raw,value=latest,enable={{github.ref == 'refs/heads/main'}}
     
     - name: Build and push
       uses: docker/build-push-action@v4
@@ -43,5 +46,6 @@ jobs:
         push: ${{ github.event_name != 'pull_request' }}
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
+        # GitHub Actions cache makes subsequent builds much faster
         cache-from: type=gha
         cache-to: type=gha,mode=max
